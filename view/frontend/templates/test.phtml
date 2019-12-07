@@ -1,0 +1,43 @@
+<div id="test-div" data-bind="scope:'test'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+       {
+           "#test-div": {
+               "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+           }
+       }
+   </script>
+
+    <script>
+        require([
+            'mage/url',
+            'Magento_Ui/js/block-loader'
+        ], function(url, blockLoader) {
+            blockLoader("<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>");
+            return url.setBaseUrl('<?php /* @escapeNotVerified */ echo $block->getBaseUrl();?>');
+        })
+    </script>
+
+
+    <table border="1px" cellspacing="0px">
+           <thead>
+           <tr>
+                   <th>ID</th>
+                   <th>Product Name</th>
+                   <th>Product Price</th>
+                   <th>Preview</th>
+               </tr>
+           </thead>
+           <tbody data-bind="foreach: productList">
+           <tr>
+                   <td data-bind="text: entity_id"></td>
+                   <td data-bind="text: name"></td>
+                   <td data-bind="text: price"></td>
+                   <td><img data-bind="attr: {src: src}" width="120" height="150" alt="Product Image"></td>
+               </tr>
+           </tbody>
+    </table>
+    <input type="text" data-bind="">
+    <button data-bind="click: getProduct">Get Next Product</button>
+</div>
+
